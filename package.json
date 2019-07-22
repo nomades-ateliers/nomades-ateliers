@@ -1,0 +1,7 @@
+{
+  "name": "nomades-ateliers",
+  "private": false,
+  "devDependencies": {
+    "lerna": "^3.4.3"
+  }
+}
