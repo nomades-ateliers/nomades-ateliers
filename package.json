@@ -2,7 +2,7 @@
   "name": "nomades-ateliers",
   "private": false,
   "scripts": {
-    "publish": "lerna run tsc && lerna publish"
+    "publish": "lerna run build && lerna publish"
   },
   "devDependencies": {
     "firebase": "^6.3.1",
