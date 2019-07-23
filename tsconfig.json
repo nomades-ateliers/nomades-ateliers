@@ -9,7 +9,7 @@
     "importHelpers": true,
     "target": "es5",
     "module": "commonjs",
-    "lib": ["es2017", "dom"],
+    "lib": ["es2016", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true
   },
