@@ -1,4 +1,4 @@
-import firebaseDefault from 'firebase';
+import * as firebaseDefault from 'firebase';
 
 // define extended interface
 interface INomadeFirebase {
