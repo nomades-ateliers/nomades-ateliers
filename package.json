@@ -5,6 +5,7 @@
     "publish": "lerna run tsc && lerna publish"
   },
   "devDependencies": {
+    "firebase": "^6.3.1",
     "lerna": "^3.4.3"
   }
 }
