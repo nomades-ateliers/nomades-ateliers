@@ -5,23 +5,27 @@ interface INomadeFirebase {
   app: firebaseDefault.app.App;
   auth: () => firebaseDefault.auth.Auth;
   database: () => firebaseDefault.database.Database;
-  initializeApp: (params: any) => firebaseDefault.app.App; 
+  initializeApp: (params: any) => firebaseDefault.app.App | void; 
   licence: string;
 }
+const nFbUtils = {
+  displayError: (message: string) => {
+    return console.log(message);
+  },
+  user: 'nomade-default',
+  project: 'default'
+};
 
-const nomadesFirebase = <T>(lib: T & Partial<INomadeFirebase>): INomadeFirebase => {
+const nomadesFirebase = <T>(lib: T & Partial<INomadeFirebase>): INomadeFirebase | void => {
   // extract data function
   const {app = null, database = null, auth = null} = lib || {};
   // create global propreties
-  const user =  null;
-  const project = 'default';
-  const displayError = (message: string) => {
-    return console.log(message);
-  }
+  const fb = nFbUtils;
   // handle missing script import
-  if (!app) return this.displayError(`La librairie Firebase.app n'est pas disponible.`);
-  if (!auth) return this.displayError(`Le module Firebase.auth n'est pas disponible.`);
-  if (!database) return this.displayError(`Le module Firebase.database n'est pas disponible.`);
+  if (!app) return fb.displayError(`La librairie Firebase.app n'est pas disponible.`);
+  if (!auth) return fb.displayError(`Le module Firebase.auth n'est pas disponible.`);
+  if (!database) return fb.displayError(`Le module Firebase.database n'est pas disponible.`);
+  if (!lib || lib === undefined) return fb.displayError(`La library Firebase n'est pas disponible.`);
   // define firebase Nomades config
   const firebaseConfig = {
     apiKey: "AIzaSyA68e6iQ1abizYOglsGXYQD1N4K9jfZen8",
@@ -40,20 +44,23 @@ const nomadesFirebase = <T>(lib: T & Partial<INomadeFirebase>): INomadeFirebase 
     database: () => (<firebaseDefault.database.Database>{
       ...database,
       ref: (scoop) => {
-        return (scoop) ? database().ref('students').child(this.user).child(this.project).child(scoop) : database().ref('students').child(this.user).child(this.project)
+        return (scoop)
+          ? database().ref('students').child(fb.user).child(fb.project).child(scoop)
+          : database().ref('students').child(fb.user).child(fb.project)
       },
     }),
     initializeApp: (params: {user: string, project: string}) => {
-      lib.initializeApp(firebaseConfig);
-      this.user = params.user;
+      fb.user = params.user;
       if (params.project)
-        this.project = params.project;
-      return lib.app;
+        fb.project = params.project;
+      if (lib.initializeApp)
+        return lib.initializeApp(firebaseConfig);
+      return;
     },
     licence: 'Firebase: Nomades Advenced Technologie',
   };
   // return extended lib
-  if(!window) console.log('[INFO]: ', nFirebase.licence, ' (node version)');
+  if(!window) console.log('[INFO]: ', (nFirebase && nFirebase.licence) ? nFirebase.licence : '', ' (node version)');
   return nFirebase;
 }
 
@@ -63,11 +70,11 @@ const nomadesFirebase = <T>(lib: T & Partial<INomadeFirebase>): INomadeFirebase 
  */
 if (window && firebase) {
   // create wrapped lib
-  var nFirebase: INomadeFirebase = nomadesFirebase({...firebase});
+  var nFirebase: INomadeFirebase | void = nomadesFirebase({...firebase});
   // overide window.firebase
-  window['firebase'] = nFirebase;
+  (window as any)['firebase'] = nFirebase;
   // overide global variable
-  var firebase = nFirebase
+  var firebase: INomadeFirebase | any = nFirebase
   // print licence
   console.log('[INFO]: ', firebase.licence, ' (browser version)');
 }

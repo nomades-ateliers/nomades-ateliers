@@ -1,21 +1,25 @@
-var _this = this;
 import * as tslib_1 from "tslib";
+var nFbUtils = {
+    displayError: function (message) {
+        return console.log(message);
+    },
+    user: 'nomade-default',
+    project: 'default'
+};
 var nomadesFirebase = function (lib) {
     // extract data function
     var _a = lib || {}, _b = _a.app, app = _b === void 0 ? null : _b, _c = _a.database, database = _c === void 0 ? null : _c, _d = _a.auth, auth = _d === void 0 ? null : _d;
     // create global propreties
-    var user = null;
-    var project = 'default';
-    var displayError = function (message) {
-        return console.log(message);
-    };
+    var fb = nFbUtils;
     // handle missing script import
     if (!app)
-        return _this.displayError("La librairie Firebase.app n'est pas disponible.");
+        return fb.displayError("La librairie Firebase.app n'est pas disponible.");
     if (!auth)
-        return _this.displayError("Le module Firebase.auth n'est pas disponible.");
+        return fb.displayError("Le module Firebase.auth n'est pas disponible.");
     if (!database)
-        return _this.displayError("Le module Firebase.database n'est pas disponible.");
+        return fb.displayError("Le module Firebase.database n'est pas disponible.");
+    if (!lib || lib === undefined)
+        return fb.displayError("La library Firebase n'est pas disponible.");
     // define firebase Nomades config
     var firebaseConfig = {
         apiKey: "AIzaSyA68e6iQ1abizYOglsGXYQD1N4K9jfZen8",
@@ -32,20 +36,23 @@ var nomadesFirebase = function (lib) {
         auth: auth,
         // extend database fonctionality
         database: function () { return (tslib_1.__assign({}, database, { ref: function (scoop) {
-                return (scoop) ? database().ref('students').child(_this.user).child(_this.project).child(scoop) : database().ref('students').child(_this.user).child(_this.project);
+                return (scoop)
+                    ? database().ref('students').child(fb.user).child(fb.project).child(scoop)
+                    : database().ref('students').child(fb.user).child(fb.project);
             } })); },
         initializeApp: function (params) {
-            lib.initializeApp(firebaseConfig);
-            _this.user = params.user;
+            fb.user = params.user;
             if (params.project)
-                _this.project = params.project;
-            return lib.app;
+                fb.project = params.project;
+            if (lib.initializeApp)
+                return lib.initializeApp(firebaseConfig);
+            return;
         },
         licence: 'Firebase: Nomades Advenced Technologie',
     };
     // return extended lib
     if (!window)
-        console.log('[INFO]: ', nFirebase.licence, ' (node version)');
+        console.log('[INFO]: ', (nFirebase && nFirebase.licence) ? nFirebase.licence : '', ' (node version)');
     return nFirebase;
 };
 /**

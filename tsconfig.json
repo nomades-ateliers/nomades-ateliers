@@ -8,10 +8,11 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es5",
-    "module": "AMD",
+    "module": "commonjs",
     "lib": ["es2016", "dom"],
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "strict": true
   },
   "exclude": ["node_modules", "tmp"]
 }
