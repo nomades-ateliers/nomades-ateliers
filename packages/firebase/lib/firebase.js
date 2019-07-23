@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var tslib_1 = require("tslib");
+import * as tslib_1 from "tslib";
 var nFbUtils = {
     displayError: function (message) {
         return console.log(message);
@@ -52,6 +50,7 @@ var nomadesFirebase = function (lib) {
         },
         licence: 'Firebase: Nomades Advenced Technologie',
     };
+    console.log('[INFO]: extending default firebase lib....');
     // return extended lib
     if (!window)
         console.log('[INFO]: ', (nFirebase && nFirebase.licence) ? nFirebase.licence : '', ' (node version)');

@@ -8,11 +8,10 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es5",
-    "module": "commonjs",
+    "module": "es6",
     "lib": ["es2016", "dom"],
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "strict": true
+    "skipDefaultLibCheck": true
   },
   "exclude": ["node_modules", "tmp"]
 }

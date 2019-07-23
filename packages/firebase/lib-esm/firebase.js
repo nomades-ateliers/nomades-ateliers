@@ -50,6 +50,7 @@ var nomadesFirebase = function (lib) {
         },
         licence: 'Firebase: Nomades Advenced Technologie',
     };
+    console.log('[INFO]: extending default firebase lib....');
     // return extended lib
     if (!window)
         console.log('[INFO]: ', (nFirebase && nFirebase.licence) ? nFirebase.licence : '', ' (node version)');
