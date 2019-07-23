@@ -8,7 +8,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es5",
-    "module": "commonjs",
+    "module": "AMD",
     "lib": ["es2016", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true
