@@ -14,7 +14,7 @@
     "lib"
   ],
   "scripts": {
-    "tsc": "tsc",
+    "tsc": "tsc & tsc -m es6 --outDir lib-esm",
     "test": "echo \"Error: run tests from root\" && exit 1"
   }
 }

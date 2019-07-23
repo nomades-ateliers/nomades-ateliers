@@ -1,0 +1,5 @@
+packages/**/src
+tsconfig.json
+tslint.json
+lerna.json
+.prettierrc
