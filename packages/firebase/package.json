@@ -16,6 +16,7 @@
     "lib-esm"
   ],
   "scripts": {
+    "build": "npm run build:tsc",
     "build:rollup": "rollup -c --config ./rollup.config.js && npm run tsc",
     "build:tsc": "tsc & tsc -m es6 --outDir lib-esm",
     "tsc": "tsc & tsc -m es6 --outDir lib-esm",
