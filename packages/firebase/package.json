@@ -17,9 +17,20 @@
   "scripts": {
     "build": "rollup -c --config ./rollup.config.js && npm run tsc",
     "tsc": "tsc & tsc -m es6 --outDir lib-esm",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "jest",
+    "e2e": "cypress open"
   },
   "dependencies": {
     "firebase": "^6.3.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "testRegex": "^.+\\.spec\\.ts$"
   }
 }

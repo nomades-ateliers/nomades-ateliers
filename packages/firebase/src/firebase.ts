@@ -57,9 +57,9 @@ const nomadesFirebase = <T>(lib: T & INomadeFirebase): T | void => {
         return lib.initializeApp(firebaseConfig);
       return;
     },
-    licence: 'Firebase: Nomades Advenced Technologie',
+    licence: 'Firebase lib extended for Nomades Advenced Technologie',
   };
-  console.log('[INFO]: extending default firebase lib....');
+  console.log('[INFO]: Extending default firebase lib ....');
   // return extended lib
   if(!window) console.log('[INFO]: ', (nFirebase && nFirebase.licence) ? nFirebase.licence : '', ' (node version)');
   return (nFirebase as unknown as T);
@@ -77,7 +77,7 @@ if (window && firebase) {
   // overide global variable
   var firebase = nFirebase
   // print licence
-  console.log('[INFO]: ', firebase.licence, ' (browser version)');
+  console.log('[INFO]:', firebase.licence, ' (browser version)');
 }
 // Handle unsexisting firebase lib
 if(!firebase) {

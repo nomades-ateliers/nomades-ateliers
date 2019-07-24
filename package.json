@@ -5,11 +5,15 @@
     "publish": "lerna run build && lerna publish"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "cypress": "^3.4.0",
     "firebase": "^6.3.1",
+    "jest": "^24.8.0",
     "lerna": "^3.4.3",
     "rollup": "^1.17.0",
     "rollup-plugin-terser": "^5.1.1",
     "rollup-plugin-typescript2": "^0.22.0",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.5.3"
   },
   "dependencies": {}
