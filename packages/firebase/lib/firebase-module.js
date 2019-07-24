@@ -58,4 +58,22 @@ export var nomadesFirebase = function (lib) {
     }
     return nFirebase;
 };
+// /**
+//  * Browser version:
+//  * auto extend firebase lib with Nomade wrapper
+//  */
+// if (!process && firebase) {
+//   // create wrapped lib
+//   var nFirebase: any = nomadesFirebase({...firebase});
+//   // overide window.firebase
+//   (window as any)['firebase'] = nFirebase;
+//   // overide global variable
+//   var firebase = nFirebase
+//   // print licence
+//   console.log('[INFO]:', firebase.licence, ' (browser version)');
+// }
+// // Handle unsexisting firebase lib
+// if(!firebase) {
+//   console.error(`Error: La librairie Firbase n'est pas disponible`)
+// }
 //# sourceMappingURL=firebase-module.js.map
