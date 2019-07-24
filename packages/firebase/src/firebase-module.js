@@ -11,6 +11,7 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+exports.__esModule = true;
 var nFbUtils = {
     displayError: function (message) {
         return console.log(message);
@@ -18,7 +19,7 @@ var nFbUtils = {
     user: 'nomade-default',
     project: 'default'
 };
-var nomadesFirebase = function (lib) {
+exports.nomadesFirebase = function (lib) {
     // extract data function
     var _a = lib || {}, _b = _a.app, app = _b === void 0 ? null : _b, _c = _a.database, database = _c === void 0 ? null : _c, _d = _a.auth, auth = _d === void 0 ? null : _d;
     // create global propreties
@@ -60,7 +61,7 @@ var nomadesFirebase = function (lib) {
                 return lib.initializeApp(firebaseConfig);
             return;
         },
-        licence: 'Firebase lib extended for Nomades Advenced Technologie',
+        licence: 'Firebase lib extended for Nomades Advenced Technologie'
     };
     console.log('[INFO]: Extending default firebase lib ....');
     // return extended lib
@@ -69,22 +70,21 @@ var nomadesFirebase = function (lib) {
     }
     return nFirebase;
 };
-/**
- * Browser version:
- * auto extend firebase lib with Nomade wrapper
- */
-if (!process && firebase) {
-    // create wrapped lib
-    var nFirebase = nomadesFirebase(__assign({}, firebase));
-    // overide window.firebase
-    window['firebase'] = nFirebase;
-    // overide global variable
-    var firebase = nFirebase;
-    // print licence
-    console.log('[INFO]:', firebase.licence, ' (browser version)');
-}
-// Handle unsexisting firebase lib
-if (!firebase) {
-    console.error("Error: La librairie Firbase n'est pas disponible");
-}
-//# sourceMappingURL=firebase.js.map
+// /**
+//  * Browser version:
+//  * auto extend firebase lib with Nomade wrapper
+//  */
+// if (!process && firebase) {
+//   // create wrapped lib
+//   var nFirebase: any = nomadesFirebase({...firebase});
+//   // overide window.firebase
+//   (window as any)['firebase'] = nFirebase;
+//   // overide global variable
+//   var firebase = nFirebase
+//   // print licence
+//   console.log('[INFO]:', firebase.licence, ' (browser version)');
+// }
+// // Handle unsexisting firebase lib
+// if(!firebase) {
+//   console.error(`Error: La librairie Firbase n'est pas disponible`)
+// }

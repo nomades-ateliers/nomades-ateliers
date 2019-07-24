@@ -37,9 +37,9 @@
 </html>
 ```
 
-### ES6 / Typescript
+### ES6
 ```sh
-$ npm install --save firebase @nomades/firebase
+$ npm install --save firebase @nomades-ateliers/firebase
 ```
 
 ```js
@@ -49,16 +49,56 @@ import * as firebase from "firebase/app";
 // Add the Firebase services that you want to use
 import 'firebase/auth';
 import 'firebase/firestore';
-// Nomades Atelier Firebase Wrapper
-import '@nomades-ateliers/firebase';
+// import Nomades Atelier Firebase Wrapper
+import { nomadesFirebase } from '@nomades-ateliers/firebase-module';
+// wrap default Firebase lib with Nomades Ateliers Firebase lib:
+firebase = nomadesFirebase(firebase);
 
 // set firebase config object
 firebase.initializeApp({
   user: '<student-username>',
   project: '<project-name>'
 })
+// using firebase auth()
+const auth = firebase.auth();
+// log current user
+console.log('[INFO]: Firebase current user: ', auth.currentUser);
 // using firebase database()
-const db = firebase.database();
+const db: firebase.database.Database = firebase.database();
+// store new data to specific ref()
+db.ref('test').push({name: 'toto', datetime: Date.now()})
+
+```
+
+
+### Typescript
+```sh
+$ npm install --save firebase @nomades-ateliers/firebase
+```
+
+```ts
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+import * as firebase from "firebase/app";
+// Add the Firebase services that you want to use
+import 'firebase/auth';
+import 'firebase/firestore';
+// import Nomades Atelier Firebase Wrapper
+import { nomadesFirebase } from '@nomades-ateliers/firebase-module';
+// wrap default Firebase lib with Nomades Ateliers Firebase lib:
+(firebase as any) = <firebase.app.App>nomadesFirebase((firebase as any));
+
+// set firebase config object
+firebase.initializeApp({
+  user: '<student-username>',
+  project: '<project-name>'
+})
+// using firebase auth()
+const auth: firebase.auth.Auth = firebase.auth();
+// log current user
+console.log('[INFO]: Firebase current user: ', auth.currentUser);
+// using firebase database()
+const db: firebase.database.Database = firebase.database();
 // store new data to specific ref()
 db.ref('test').push({name: 'toto', datetime: Date.now()})
 

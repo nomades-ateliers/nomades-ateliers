@@ -73,7 +73,7 @@ var nomadesFirebase = function (lib) {
  * Browser version:
  * auto extend firebase lib with Nomade wrapper
  */
-if (window && firebase) {
+if (!process && firebase) {
     // create wrapped lib
     var nFirebase = nomadesFirebase(__assign({}, firebase));
     // overide window.firebase

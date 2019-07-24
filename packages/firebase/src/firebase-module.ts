@@ -17,7 +17,7 @@ const nFbUtils = {
   project: 'default'
 };
 
-const nomadesFirebase = <T>(lib: T & INomadeFirebase): T | void => {
+export const nomadesFirebase = <T>(lib: T & INomadeFirebase): T | void => {
   // extract data function
   const {app = null, database = null, auth = null} = lib || {};
   // create global propreties
@@ -68,21 +68,21 @@ const nomadesFirebase = <T>(lib: T & INomadeFirebase): T | void => {
   return (nFirebase as unknown as T);
 }
 
-/**
- * Browser version:
- * auto extend firebase lib with Nomade wrapper
- */
-if (!process && firebase) {
-  // create wrapped lib
-  var nFirebase: any = nomadesFirebase({...firebase});
-  // overide window.firebase
-  (window as any)['firebase'] = nFirebase;
-  // overide global variable
-  var firebase = nFirebase
-  // print licence
-  console.log('[INFO]:', firebase.licence, ' (browser version)');
-}
-// Handle unsexisting firebase lib
-if(!firebase) {
-  console.error(`Error: La librairie Firbase n'est pas disponible`)
-}
+// /**
+//  * Browser version:
+//  * auto extend firebase lib with Nomade wrapper
+//  */
+// if (!process && firebase) {
+//   // create wrapped lib
+//   var nFirebase: any = nomadesFirebase({...firebase});
+//   // overide window.firebase
+//   (window as any)['firebase'] = nFirebase;
+//   // overide global variable
+//   var firebase = nFirebase
+//   // print licence
+//   console.log('[INFO]:', firebase.licence, ' (browser version)');
+// }
+// // Handle unsexisting firebase lib
+// if(!firebase) {
+//   console.error(`Error: La librairie Firbase n'est pas disponible`)
+// }
