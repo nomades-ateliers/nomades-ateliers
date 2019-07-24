@@ -18,5 +18,8 @@
     "build": "rollup -c --config ./rollup.config.js && npm run tsc",
     "tsc": "tsc & tsc -m es6 --outDir lib-esm",
     "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "firebase": "^6.3.1"
   }
 }

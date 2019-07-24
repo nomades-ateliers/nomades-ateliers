@@ -1,11 +1,11 @@
-import * as firebaseDefault from 'firebase';
+// import * as firebaseDefault from 'firebase';
 
 // define extended interface
 interface INomadeFirebase {
-  app: firebaseDefault.app.App;
-  auth: () => firebaseDefault.auth.Auth;
-  database: () => firebaseDefault.database.Database;
-  initializeApp: (params: any) => firebaseDefault.app.App | void; 
+  app: any;
+  auth: () => any;
+  database: () => any;
+  initializeApp: (params: any) => any; 
   licence: string;
 }
 const nFbUtils = {
@@ -16,7 +16,7 @@ const nFbUtils = {
   project: 'default'
 };
 
-const nomadesFirebase = <T>(lib: T & Partial<INomadeFirebase>): INomadeFirebase | void => {
+const nomadesFirebase = <T>(lib: T & INomadeFirebase): T | void => {
   // extract data function
   const {app = null, database = null, auth = null} = lib || {};
   // create global propreties
@@ -37,13 +37,13 @@ const nomadesFirebase = <T>(lib: T & Partial<INomadeFirebase>): INomadeFirebase 
     appId: "1:122422675990:web:082edf96bf9738b5"
   };
   // define Nomade Firebase Wrapper
-  const nFirebase: INomadeFirebase = {
+  const nFirebase = {
     app,
     auth,
     // extend database fonctionality
-    database: () => (<firebaseDefault.database.Database>{
+    database: () => ({
       ...database,
-      ref: (scoop) => {
+      ref: (scoop: string) => {
         return (scoop)
           ? database().ref('students').child(fb.user).child(fb.project).child(scoop)
           : database().ref('students').child(fb.user).child(fb.project)
@@ -62,7 +62,7 @@ const nomadesFirebase = <T>(lib: T & Partial<INomadeFirebase>): INomadeFirebase 
   console.log('[INFO]: extending default firebase lib....');
   // return extended lib
   if(!window) console.log('[INFO]: ', (nFirebase && nFirebase.licence) ? nFirebase.licence : '', ' (node version)');
-  return nFirebase;
+  return (nFirebase as unknown as T);
 }
 
 /**
@@ -71,11 +71,11 @@ const nomadesFirebase = <T>(lib: T & Partial<INomadeFirebase>): INomadeFirebase 
  */
 if (window && firebase) {
   // create wrapped lib
-  var nFirebase: INomadeFirebase | void = nomadesFirebase({...firebase});
+  var nFirebase: any = nomadesFirebase({...firebase});
   // overide window.firebase
   (window as any)['firebase'] = nFirebase;
   // overide global variable
-  var firebase: INomadeFirebase | any = nFirebase
+  var firebase = nFirebase
   // print licence
   console.log('[INFO]: ', firebase.licence, ' (browser version)');
 }

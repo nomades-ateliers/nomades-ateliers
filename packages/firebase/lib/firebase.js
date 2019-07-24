@@ -1,4 +1,16 @@
-import * as tslib_1 from "tslib";
+"use strict";
+// import * as firebaseDefault from 'firebase';
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var nFbUtils = {
     displayError: function (message) {
         return console.log(message);
@@ -35,7 +47,7 @@ var nomadesFirebase = function (lib) {
         app: app,
         auth: auth,
         // extend database fonctionality
-        database: function () { return (tslib_1.__assign({}, database, { ref: function (scoop) {
+        database: function () { return (__assign({}, database, { ref: function (scoop) {
                 return (scoop)
                     ? database().ref('students').child(fb.user).child(fb.project).child(scoop)
                     : database().ref('students').child(fb.user).child(fb.project);
@@ -62,7 +74,7 @@ var nomadesFirebase = function (lib) {
  */
 if (window && firebase) {
     // create wrapped lib
-    var nFirebase = nomadesFirebase(tslib_1.__assign({}, firebase));
+    var nFirebase = nomadesFirebase(__assign({}, firebase));
     // overide window.firebase
     window['firebase'] = nFirebase;
     // overide global variable
