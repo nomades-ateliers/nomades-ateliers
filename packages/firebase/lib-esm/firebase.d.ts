@@ -1,3 +1,4 @@
+declare var process: any;
 interface INomadeFirebase {
     app: any;
     auth: () => any;

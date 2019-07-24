@@ -64,8 +64,9 @@ var nomadesFirebase = function (lib) {
     };
     console.log('[INFO]: Extending default firebase lib ....');
     // return extended lib
-    if (!window)
+    if (typeof process === 'object' && process + '' === '[object process]') {
         console.log('[INFO]: ', (nFirebase && nFirebase.licence) ? nFirebase.licence : '', ' (node version)');
+    }
     return nFirebase;
 };
 /**
