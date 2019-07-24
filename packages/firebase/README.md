@@ -82,7 +82,7 @@ $ npm install --save firebase @nomades-ateliers/firebase
 import * as firebase from "firebase/app";
 // Add the Firebase services that you want to use
 import 'firebase/auth';
-import 'firebase/firestore';
+import 'firebase/database';
 // import Nomades Atelier Firebase Wrapper
 import { nomadesFirebase } from '@nomades-ateliers/firebase-module';
 // wrap default Firebase lib with Nomades Ateliers Firebase lib:
