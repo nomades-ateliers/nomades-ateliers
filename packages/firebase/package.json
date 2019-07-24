@@ -12,10 +12,12 @@
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "lib",
+    "lib-esm"
   ],
   "scripts": {
-    "build": "rollup -c --config ./rollup.config.js && npm run tsc",
+    "build:rollup": "rollup -c --config ./rollup.config.js && npm run tsc",
+    "build:tsc": "tsc & tsc -m es6 --outDir lib-esm",
     "tsc": "tsc & tsc -m es6 --outDir lib-esm",
     "test": "jest",
     "e2e": "cypress open"

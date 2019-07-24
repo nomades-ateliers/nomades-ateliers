@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Firebase Database Student</title>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-database.js"></script>
+  <!-- Nomades Firebase wrapper is always required and must be listed last -->
+  <script src="https://raw.githack.com/nomades-ateliers/nomades-ateliers/master/packages/firebase/lib/firebase.js"></script>
+</head>
+<body>
+  <app></app>
+  <script>
+      // create firebase configuration object and init app()
+      firebase.initializeApp({
+        user: 'fazio-demo',
+        project: 'demo'
+      })
+      const db = firebase.database();
+      // testing firewbase database with .on('child_added')
+      db.ref('test').on('child_added', snap => console.log('Child added: ', snap.val()));
+      // testing firebase database with push()
+      setTimeout(_=> {
+        db.ref('test').push({name: 'toto', datetime: Date.now()})
+      }, 2000)
+  </script>
+</body>
+</html>
