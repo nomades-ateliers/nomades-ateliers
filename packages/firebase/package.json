@@ -1,6 +1,6 @@
 {
   "name": "@nomades-ateliers/firebase",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Firebase wrapper library for Nomades Ateliers",
   "author": "FazioNico <contact@nicolasfazio.ch>",
   "homepage": "https:/nomades.ch",
