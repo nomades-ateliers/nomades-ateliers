@@ -1,7 +1,7 @@
 // import * as firebaseDefault from 'firebase';
 
 // define extended interface
-declare var process: any;
+// declare var process: any;
 interface INomadeFirebase {
   app: any;
   auth: () => any;
@@ -61,10 +61,10 @@ export const nomadesFirebase = <T>(lib: T & INomadeFirebase): T | void => {
     licence: 'Firebase lib extended for Nomades Advenced Technologie',
   };
   console.log('[INFO]: Extending default firebase lib ....');
-  // return extended lib
-  if(typeof process === 'object' && process + '' === '[object process]'){
-    console.log('[INFO]: ', (nFirebase && nFirebase.licence) ? nFirebase.licence : '', ' (node version)');
-  }
+  // // return extended lib
+  // if(typeof process === 'object' && process + '' === '[object process]'){
+  //   console.log('[INFO]: ', (nFirebase && nFirebase.licence) ? nFirebase.licence : '', ' (node version)');
+  // }
   return (nFirebase as unknown as T);
 }
 

@@ -52,10 +52,10 @@ export var nomadesFirebase = function (lib) {
         licence: 'Firebase lib extended for Nomades Advenced Technologie',
     };
     console.log('[INFO]: Extending default firebase lib ....');
-    // return extended lib
-    if (typeof process === 'object' && process + '' === '[object process]') {
-        console.log('[INFO]: ', (nFirebase && nFirebase.licence) ? nFirebase.licence : '', ' (node version)');
-    }
+    // // return extended lib
+    // if(typeof process === 'object' && process + '' === '[object process]'){
+    //   console.log('[INFO]: ', (nFirebase && nFirebase.licence) ? nFirebase.licence : '', ' (node version)');
+    // }
     return nFirebase;
 };
 // /**

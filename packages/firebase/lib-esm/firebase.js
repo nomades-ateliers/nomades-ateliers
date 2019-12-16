@@ -64,16 +64,16 @@ var nomadesFirebase = function (lib) {
     };
     console.log('[INFO]: Extending default firebase lib ....');
     // return extended lib
-    if (typeof process === 'object' && process + '' === '[object process]') {
-        console.log('[INFO]: ', (nFirebase && nFirebase.licence) ? nFirebase.licence : '', ' (node version)');
-    }
+    // if(typeof process === 'object' && process + '' === '[object process]'){
+    //   console.log('[INFO]: ', (nFirebase && nFirebase.licence) ? nFirebase.licence : '', ' (node version)');
+    // }
     return nFirebase;
 };
 /**
  * Browser version:
  * auto extend firebase lib with Nomade wrapper
  */
-if (!process && firebase) {
+if (firebase) {
     // create wrapped lib
     var nFirebase = nomadesFirebase(__assign({}, firebase));
     // overide window.firebase
