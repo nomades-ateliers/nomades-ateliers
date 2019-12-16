@@ -18,7 +18,7 @@
   <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-database.js"></script>
   <!-- import Nomades Atelier Firebase Wrapper -->
-  <script src="https://raw.githack.com/nomades-ateliers/nomades-ateliers/master/packages/firebase/lib/firebase.js"></script>
+  <script src="https://rawcdn.githack.com/nomades-ateliers/nomades-ateliers/048024775b0dd571a3152a470964cd7e85b1e49d/packages/firebase/lib/firebase.js"></script>
 </head>
 <body>
   <app></app>
