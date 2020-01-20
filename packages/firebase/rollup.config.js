@@ -1,6 +1,8 @@
 import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json';
 import {terser} from "rollup-plugin-terser";
+
+import { uglify } from "rollup-plugin-uglify";
 console.log('Rollup work..........');
 
 export default {
@@ -27,6 +29,7 @@ export default {
   typescript({
    typescript: require('typescript'),
   }),
-  terser() // minifies generated bundles
+  terser(), // minifies generated bundles
+  uglify()
  ]
 };
