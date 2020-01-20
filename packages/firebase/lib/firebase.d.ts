@@ -1,13 +1,13 @@
+import * as firebaseDefault from "firebase/app";
+import 'firebase/auth';
+import 'firebase/database';
+import 'firebase/firestore';
 interface INomadeFirebase {
     app: any;
-    auth: () => any;
-    database: () => any;
-    initializeApp: (params: any) => any;
+    auth: () => firebaseDefault.auth.Auth;
+    database: () => firebaseDefault.database.Database;
+    initializeApp: (params: any) => void;
     licence: string;
 }
-declare const nFbUtils: {
-    displayError: (message: string) => void;
-    user: string;
-    project: string;
-};
-declare const nomadesFirebase: <T>(lib: T & INomadeFirebase) => void | T;
+export declare const firebase: void | Partial<INomadeFirebase>;
+export {};

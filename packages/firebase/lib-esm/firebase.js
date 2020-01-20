@@ -1,19 +1,14 @@
-"use strict";
-// import * as firebaseDefault from 'firebase';
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
+import * as tslib_1 from "tslib";
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+import * as firebaseDefault from "firebase/app";
+// Add the Firebase services that you want to use
+import 'firebase/auth';
+import 'firebase/database';
+import 'firebase/firestore';
 var nFbUtils = {
     displayError: function (message) {
-        return console.log(message);
+        return (console.log(message), null);
     },
     user: 'nomade-default',
     project: 'default'
@@ -25,13 +20,13 @@ var nomadesFirebase = function (lib) {
     var fb = nFbUtils;
     // handle missing script import
     if (!app)
-        return fb.displayError("La librairie Firebase.app n'est pas disponible.");
+        throw fb.displayError("La librairie Firebase.app n'est pas disponible.");
     if (!auth)
-        return fb.displayError("Le module Firebase.auth n'est pas disponible.");
+        throw fb.displayError("Le module Firebase.auth n'est pas disponible.");
     if (!database)
-        return fb.displayError("Le module Firebase.database n'est pas disponible.");
+        throw fb.displayError("Le module Firebase.database n'est pas disponible.");
     if (!lib || lib === undefined)
-        return fb.displayError("La library Firebase n'est pas disponible.");
+        throw fb.displayError("La library Firebase n'est pas disponible.");
     // define firebase Nomades config
     var firebaseConfig = {
         apiKey: "AIzaSyA68e6iQ1abizYOglsGXYQD1N4K9jfZen8",
@@ -47,7 +42,7 @@ var nomadesFirebase = function (lib) {
         app: app,
         auth: auth,
         // extend database fonctionality
-        database: function () { return (__assign({}, database, { ref: function (scoop) {
+        database: function () { return (tslib_1.__assign({}, database, { ref: function (scoop) {
                 return (scoop)
                     ? database().ref('students').child(fb.user).child(fb.project).child(scoop)
                     : database().ref('students').child(fb.user).child(fb.project);
@@ -69,22 +64,25 @@ var nomadesFirebase = function (lib) {
     // }
     return nFirebase;
 };
-/**
- * Browser version:
- * auto extend firebase lib with Nomade wrapper
- */
-if (firebase) {
+// wrap default Firebase lib with Nomades Ateliers Firebase lib:
+export var firebase = (function () {
+    // Handle unsexisting firebase lib
+    if (!firebaseDefault) {
+        console.error("Error: La librairie Firbase n'est pas disponible.");
+        console.error("       Essayez : \"$ npm i firebase --save\" pour installer la librairie firebase dasn votre projet ");
+        return;
+    }
     // create wrapped lib
-    var nFirebase = nomadesFirebase(__assign({}, firebase));
+    var nFirebase = nomadesFirebase(firebaseDefault);
+    if (!nFirebase)
+        return console.log('Error: FIrebase implementation error...');
     // overide window.firebase
-    window['firebase'] = nFirebase;
+    if (window)
+        window['firebase'] = nFirebase;
     // overide global variable
     var firebase = nFirebase;
     // print licence
-    console.log('[INFO]:', firebase.licence, ' (browser version)');
-}
-// Handle unsexisting firebase lib
-if (!firebase) {
-    console.error("Error: La librairie Firbase n'est pas disponible");
-}
+    console.log('[INFO]:', nFirebase.licence, ' (browser version)');
+    return firebase;
+})();
 //# sourceMappingURL=firebase.js.map
