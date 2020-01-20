@@ -6,7 +6,7 @@
 
 ### ES6
 ```sh
-$ npm install --save firebase firebase/auth firebase/database @nomades-ateliers/firebase
+$ npm install --save @nomades-ateliers/firebase
 ```
 
 ```js
@@ -33,7 +33,7 @@ db.ref('test').push({name: 'toto', datetime: Date.now()})
 
 ### Typescript
 ```sh
-$ npm install --save firebase @nomades-ateliers/firebase
+$ npm install --save @nomades-ateliers/firebase
 ```
 
 ```ts
