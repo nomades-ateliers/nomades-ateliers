@@ -1,32 +1,38 @@
-// import * as firebaseDefault from 'firebase';
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+import * as firebaseDefault from "firebase/app";
+// Add the Firebase services that you want to use
+import 'firebase/auth';
+import 'firebase/database';
+import 'firebase/firestore';
 
 // define extended interface
 // declare var process: any;
 interface INomadeFirebase {
   app: any;
-  auth: () => any;
-  database: () => any;
-  initializeApp: (params: any) => any; 
+  auth: () => firebaseDefault.auth.Auth;
+  database: () => firebaseDefault.database.Database;
+  initializeApp: (params: any) => void; 
   licence: string;
 }
 const nFbUtils = {
   displayError: (message: string) => {
-    return console.log(message);
+    return (console.log(message), null);
   },
   user: 'nomade-default',
   project: 'default'
 };
 
-const nomadesFirebase = <T>(lib: T & INomadeFirebase): T | void => {
+const nomadesFirebase = <T>(lib: Partial<T & INomadeFirebase>) => {
   // extract data function
   const {app = null, database = null, auth = null} = lib || {};
   // create global propreties
   const fb = nFbUtils;
   // handle missing script import
-  if (!app) return fb.displayError(`La librairie Firebase.app n'est pas disponible.`);
-  if (!auth) return fb.displayError(`Le module Firebase.auth n'est pas disponible.`);
-  if (!database) return fb.displayError(`Le module Firebase.database n'est pas disponible.`);
-  if (!lib || lib === undefined) return fb.displayError(`La library Firebase n'est pas disponible.`);
+  if (!app) throw fb.displayError(`La librairie Firebase.app n'est pas disponible.`);
+  if (!auth) throw fb.displayError(`Le module Firebase.auth n'est pas disponible.`);
+  if (!database) throw fb.displayError(`Le module Firebase.database n'est pas disponible.`);
+  if (!lib || lib === undefined) throw fb.displayError(`La library Firebase n'est pas disponible.`);
   // define firebase Nomades config
   const firebaseConfig = {
     apiKey: "AIzaSyA68e6iQ1abizYOglsGXYQD1N4K9jfZen8",
@@ -38,11 +44,11 @@ const nomadesFirebase = <T>(lib: T & INomadeFirebase): T | void => {
     appId: "1:122422675990:web:082edf96bf9738b5"
   };
   // define Nomade Firebase Wrapper
-  const nFirebase = {
+  const nFirebase: INomadeFirebase = {
     app,
     auth,
     // extend database fonctionality
-    database: () => ({
+    database: () => <any>({
       ...database,
       ref: (scoop: string) => {
         return (scoop)
@@ -65,24 +71,26 @@ const nomadesFirebase = <T>(lib: T & INomadeFirebase): T | void => {
   // if(typeof process === 'object' && process + '' === '[object process]'){
   //   console.log('[INFO]: ', (nFirebase && nFirebase.licence) ? nFirebase.licence : '', ' (node version)');
   // }
-  return (nFirebase as unknown as T);
+  return (nFirebase as Partial<INomadeFirebase>);
 }
 
-/**
- * Browser version:
- * auto extend firebase lib with Nomade wrapper
- */
-if (firebase) {
+// wrap default Firebase lib with Nomades Ateliers Firebase lib:
+export const firebase = (() => {
+  // Handle unsexisting firebase lib
+  if(!firebaseDefault) {
+    console.error(`Error: La librairie Firbase n'est pas disponible.`)
+    console.error(`       Essayez : "$ npm i firebase --save" pour installer la librairie firebase dasn votre projet `)
+    return;
+  }
   // create wrapped lib
-  var nFirebase: any = nomadesFirebase({...firebase});
+  const nFirebase = nomadesFirebase(firebaseDefault);
+  if (!nFirebase) return console.log('Error: FIrebase implementation error...');
+  
   // overide window.firebase
-  (window as any)['firebase'] = nFirebase;
+  if (window) (window as any)['firebase'] = nFirebase;
   // overide global variable
   var firebase = nFirebase
   // print licence
-  console.log('[INFO]:', firebase.licence, ' (browser version)');
-}
-// Handle unsexisting firebase lib
-if(!firebase) {
-  console.error(`Error: La librairie Firbase n'est pas disponible`)
-}
+  console.log('[INFO]:', nFirebase.licence, ' (browser version)');
+  return firebase;
+})();
