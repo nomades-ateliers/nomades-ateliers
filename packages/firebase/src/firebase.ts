@@ -90,6 +90,6 @@ export const firebase = (() => {
   // overide global variable
   var firebase = nFirebase
   // print licence
-  console.log('[INFO]:', nFirebase.licence, ` (browser version)`);
+  console.log('[INFO]:', nFirebase.licence, ` (browser version v1)`);
   return firebase;
 })();
