@@ -3,7 +3,7 @@
   "private": false,
   "scripts": {
     "build": "lerna run build",
-    "publish": "lerna run build && lerna publish"
+    "publish": "lerna run build && lerna publish -f"
   },
   "devDependencies": {
     "@types/jest": "^24.0.15",
