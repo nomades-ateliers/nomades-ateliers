@@ -85,12 +85,11 @@ export const firebase = (() => {
   // create wrapped lib
   const nFirebase = nomadesFirebase(firebaseDefault);
   if (!nFirebase) return console.log('Error: FIrebase implementation error...');
-  
   // overide window.firebase
   if (window) (window as any)['firebase'] = nFirebase;
   // overide global variable
   var firebase = nFirebase
   // print licence
-  console.log('[INFO]:', nFirebase.licence, ' (browser version)');
+  console.log('[INFO]:', nFirebase.licence, ` (browser version)`);
   return firebase;
 })();

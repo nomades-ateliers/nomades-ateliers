@@ -82,7 +82,7 @@ export var firebase = (function () {
     // overide global variable
     var firebase = nFirebase;
     // print licence
-    console.log('[INFO]:', nFirebase.licence, ' (browser version)');
+    console.log('[INFO]:', nFirebase.licence, " (browser version)");
     return firebase;
 })();
 //# sourceMappingURL=firebase.js.map
